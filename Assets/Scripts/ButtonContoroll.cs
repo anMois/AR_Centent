@@ -18,7 +18,7 @@ public class ButtonContoroll : MonoBehaviour
             return;
 
         curState = State.Move;
-        animator.SetBool("Walk", true);
+        animator.SetTrigger("Walk");
     }
 
     //Idle 버튼
@@ -26,6 +26,9 @@ public class ButtonContoroll : MonoBehaviour
     {
         if (curState == State.Idle)
             return;
+
+        curState= State.Idle;
+        animator.SetTrigger("Idle");
     }
 
     //OtherIdle 버튼
@@ -33,5 +36,8 @@ public class ButtonContoroll : MonoBehaviour
     {
         if (curState == State.Other)
             return;
+
+        curState= State.Other;
+        animator.SetTrigger("Other");
     }
 }
