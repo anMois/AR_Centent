@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: b5d74c76225ceaa46b085db7a5037889, type: 2}
   m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 7597973568779499262, guid: ebc24310e34e4c04db5596dbcb4973b7, type: 3}
+  m_TrackedImagePrefab: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +478,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1989822719}
   - component: {fileID: 1989822720}
+  - component: {fileID: 1989822721}
   m_Layer: 0
   m_Name: ImageControll
   m_TagString: Untagged
@@ -513,4 +514,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageManager: {fileID: 338603883}
-  timer: 0
+  objList:
+  - {fileID: 7597973568779499262, guid: ebc24310e34e4c04db5596dbcb4973b7, type: 3}
+  imageList: []
+  timerList: []
+  timer: 1
+--- !u!114 &1989822721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989822718}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0301313b2bcbbc44a44e75b3ab216b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageManager: {fileID: 338603883}
+  dragonprefab: {fileID: 7597973568779499262, guid: ebc24310e34e4c04db5596dbcb4973b7, type: 3}
+  magicianprefab: {fileID: 3200722274007494896, guid: faddd93c9ca9ea349b7bf125dd882a81, type: 3}
