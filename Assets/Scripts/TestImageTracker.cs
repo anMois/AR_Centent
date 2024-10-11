@@ -33,9 +33,7 @@ public class TestImageTracker : MonoBehaviour
                     if (checkTime < timer)
                     {
                         trackImageList[i].gameObject.SetActive(false);
-                        //Destroy(trackImageList[i].gameObject);
                         timer = 0;
-                        Debug.Log("don't look");
                     }
                     else
                     {
@@ -73,10 +71,16 @@ public class TestImageTracker : MonoBehaviour
         foreach (ARTrackedImage trackedImage in args.updated)
         {
             //이미지의 변셩사항이 있는 경우 자식으로 있건 게임오브젝트를 위치와 회전을 갱신
-            trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
-            trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
-
-            trackedImage.transform.GetChild(0).gameObject.SetActive(true);
+            if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
+            {
+                trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
+                trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
+                trackedImage.gameObject.SetActive(true);
+            }
+            else
+            {
+                trackedImage.gameObject.SetActive(false);
+            }
         }
     }
 }

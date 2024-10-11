@@ -12,14 +12,12 @@ public class ImageTrackControll : MonoBehaviour
     public float maxTimer;
     public float timer;
 
-
     private void Awake()
     {
         foreach (GameObject obj in objList)
         {
             string name = obj.name;
             dicPrefab.Add(name, obj);
-
         }
     }
 
@@ -38,7 +36,7 @@ public class ImageTrackControll : MonoBehaviour
         if (imageList.Count > 0)
         {
             List<ARTrackedImage> tImage = new List<ARTrackedImage>();
-
+        
             for (int i = 0; i < imageList.Count; i++)
             {
                 if (imageList[i].trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Limited)
@@ -48,21 +46,25 @@ public class ImageTrackControll : MonoBehaviour
                     {
                         Debug.Log("Limited인 상태에서 적정 시간이 지난 후");
                         string name = imageList[i].referenceImage.name;
+                        Debug.Log(name + " name");
                         GameObject obj = dicPrefab[name];
-                        Debug.Log(obj);
-                        Destroy(obj);
+                        Debug.Log(obj + " obj");
+                        //Destroy(obj);
+                        obj.SetActive(false);
+                        Debug.Log(obj.activeSelf + " obj.activeself");
                         tImage.Add(imageList[i]);
                         timer = 0;
                     }
                 }
             }
-
+        
             if (tImage.Count > 0)
             {
                 for (int i = 0; i < tImage.Count; i++)
                 {
                     int num = imageList.IndexOf(tImage[i]);
                     imageList.Remove(imageList[num]);
+                    Debug.Log(imageList.Count + " imageList Count");
                 }
             }
         }
@@ -93,6 +95,11 @@ public class ImageTrackControll : MonoBehaviour
 
         foreach (ARTrackedImage trackImage in args.updated)
         {
+            if (!imageList.Contains(trackImage))
+            {
+                imageList.Add(trackImage);
+            }
+
             UpdateImage(trackImage);
         }
     }
