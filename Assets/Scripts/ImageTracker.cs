@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class TestImageTracker : MonoBehaviour
+public class ImageTracker : MonoBehaviour
 {
     [SerializeField] ARTrackedImageManager imageManager;
 
