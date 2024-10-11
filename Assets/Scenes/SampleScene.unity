@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 338603882}
   - component: {fileID: 338603881}
   - component: {fileID: 338603883}
-  - component: {fileID: 338603884}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -185,19 +184,6 @@ MonoBehaviour:
   m_SerializedLibrary: {fileID: 11400000, guid: b5d74c76225ceaa46b085db7a5037889, type: 2}
   m_MaxNumberOfMovingImages: 2
   m_TrackedImagePrefab: {fileID: 0}
---- !u!114 &338603884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338603880}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastPrefab: {fileID: 0}
 --- !u!1 &654318001
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageManager: {fileID: 338603883}
-  objPrefab: {fileID: 7597973568779499262, guid: ebc24310e34e4c04db5596dbcb4973b7, type: 3}
-  magicianprefab: {fileID: 3200722274007494896, guid: faddd93c9ca9ea349b7bf125dd882a81, type: 3}
+  objPrefabList:
+  - {fileID: 7597973568779499262, guid: ebc24310e34e4c04db5596dbcb4973b7, type: 3}
   trackImageList: []
+  checkTime: 1
+  timer: 0
