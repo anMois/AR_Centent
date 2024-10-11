@@ -9,8 +9,9 @@ public class ImageTrackControll : MonoBehaviour
     [SerializeField] List<GameObject> objList = new List<GameObject>();
     [SerializeField] Dictionary<string, GameObject> dicPrefab = new Dictionary<string, GameObject>();
     [SerializeField] List<ARTrackedImage> imageList = new List<ARTrackedImage>();
-    [SerializeField] List<float> timerList = new List<float>();
+    public float maxTimer;
     public float timer;
+
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class ImageTrackControll : MonoBehaviour
         {
             string name = obj.name;
             dicPrefab.Add(name, obj);
+
         }
     }
 
@@ -41,16 +43,16 @@ public class ImageTrackControll : MonoBehaviour
             {
                 if (imageList[i].trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Limited)
                 {
-                    if (timerList[i] > timer)
+                    timer += Time.deltaTime;
+                    if (maxTimer < timer)
                     {
+                        Debug.Log("Limited인 상태에서 적정 시간이 지난 후");
                         string name = imageList[i].referenceImage.name;
                         GameObject obj = dicPrefab[name];
-                        obj.SetActive(false);
+                        Debug.Log(obj);
+                        Destroy(obj);
                         tImage.Add(imageList[i]);
-                    }
-                    else
-                    {
-                        timerList[i] += Time.deltaTime;
+                        timer = 0;
                     }
                 }
             }
@@ -61,7 +63,6 @@ public class ImageTrackControll : MonoBehaviour
                 {
                     int num = imageList.IndexOf(tImage[i]);
                     imageList.Remove(imageList[num]);
-                    timerList.Remove(timerList[num]);
                 }
             }
         }
@@ -69,42 +70,30 @@ public class ImageTrackControll : MonoBehaviour
 
     private void OnImageChange(ARTrackedImagesChangedEventArgs args)
     {
-        foreach (ARTrackedImage image in args.added)
+        foreach (ARTrackedImage trackImage in args.added)
         {
-            Debug.Log("add if진입전");
-            if (!imageList.Contains(image))
+            if (!imageList.Contains(trackImage))
             {
-                Debug.Log("if진입후");
-                imageList.Add(image);
-                timerList.Add(0);
+                imageList.Add(trackImage);
             }
 
-            string imageName = image.referenceImage.name;
-
+            string imageName = trackImage.referenceImage.name;
+            
             switch (imageName)
             {
                 case "Y Bot":
-                    GameObject obj = Instantiate(GetObj(imageName), image.transform.position, image.transform.rotation);
-                    obj.transform.parent = image.transform;
+                    GameObject obj = Instantiate(GetObj(imageName), trackImage.transform.position, trackImage.transform.rotation);
+                    obj.transform.parent = trackImage.transform;
+                    break;
+                default:
+                    Debug.Log("해당된 trackImage의 이름이 없음");
                     break;
             }
-
         }
 
-        foreach (ARTrackedImage image in args.updated)
+        foreach (ARTrackedImage trackImage in args.updated)
         {
-            if (!imageList.Contains(image))
-            {
-                imageList.Add(image);
-                timerList.Add(0);
-            }
-            else
-            {
-                int num = imageList.IndexOf(image);
-                timerList[num] = 0;
-            }
-
-            UpdateImage(image);
+            UpdateImage(trackImage);
         }
     }
 

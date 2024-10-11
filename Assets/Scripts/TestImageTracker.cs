@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -7,8 +6,11 @@ public class TestImageTracker : MonoBehaviour
 {
     [SerializeField] ARTrackedImageManager imageManager;
 
-    [SerializeField] GameObject dragonprefab;
+    [SerializeField] GameObject objPrefab;
     [SerializeField] GameObject magicianprefab;
+    [SerializeField] float timer;
+    [SerializeField] float checkTime;
+    [SerializeField] List<ARTrackedImage> trackImageList = new List<ARTrackedImage>();
 
     private void OnEnable()
     {
@@ -18,8 +20,32 @@ public class TestImageTracker : MonoBehaviour
     private void OnDisable()
     {
         imageManager.trackedImagesChanged -= OnImageChange;
-
     }
+
+    private void Update()
+    {
+        if (trackImageList.Count > 0)
+        {
+            for (int i = 0; i < trackImageList.Count; i++)
+            {
+                if (trackImageList[i].trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Limited)
+                {
+                    if (checkTime < timer)
+                    {
+                        trackImageList[i].gameObject.SetActive(false);
+                        //Destroy(trackImageList[i].gameObject);
+                        timer = 0;
+                        Debug.Log("don't look");
+                    }
+                    else
+                    {
+                        timer += Time.deltaTime;
+                    }
+                }
+            }
+        }
+    }
+
     private void OnImageChange(ARTrackedImagesChangedEventArgs args)
     {
         //새로운 이미지가 추적되었을 때
@@ -31,9 +57,10 @@ public class TestImageTracker : MonoBehaviour
             //새로운 게임오브젝트를 트래킹한 이미지의 자식으로 생성
             switch (imageName)
             {
-                case "Dragon":
-                    GameObject dragon = Instantiate(dragonprefab, trackedImage.transform.position, trackedImage.transform.rotation);
+                case "Y Bot":
+                    GameObject dragon = Instantiate(objPrefab, trackedImage.transform.position, trackedImage.transform.rotation);
                     dragon.transform.parent = trackedImage.transform;
+                    trackImageList.Add(trackedImage);
                     break;
                 case "Magician":
                     GameObject magician = Instantiate(magicianprefab, trackedImage.transform.position, trackedImage.transform.rotation);
@@ -48,13 +75,8 @@ public class TestImageTracker : MonoBehaviour
             //이미지의 변셩사항이 있는 경우 자식으로 있건 게임오브젝트를 위치와 회전을 갱신
             trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
             trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
-        }
 
-        //기존의 이미지가 사라졌을 때
-        foreach (ARTrackedImage trackedImage in args.removed)
-        {
-            //이미지가 사라진 경우 자식으로 있었던 게임오브젝트를 삭제
-            Destroy(trackedImage.transform.GetChild(0).gameObject);
+            trackedImage.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 }
