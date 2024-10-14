@@ -17,7 +17,9 @@ public class ImageTracker : MonoBehaviour
         foreach (GameObject obj in objPrefabList)
         {
             string name = obj.name;
-            objDicList.Add(name, obj);
+            GameObject objPrefab = Instantiate(obj);
+            objDicList.Add(name, objPrefab);
+            objPrefab.SetActive(false);
         }
     }
 
@@ -62,8 +64,6 @@ public class ImageTracker : MonoBehaviour
             switch (imageName)
             {
                 case "Y Bot":
-                    GameObject dragon = Instantiate(GetObjPrefab(imageName), trackedImage.transform.position, trackedImage.transform.rotation);
-                    dragon.transform.parent = trackedImage.transform;
                     trackImageList.Add(trackedImage);
                     break;
             }
@@ -71,16 +71,20 @@ public class ImageTracker : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in args.updated)
         {
+            string name = trackedImage.referenceImage.name;
+            GameObject obj = objDicList[name];
             if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
             {
-                trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
-                trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
-                trackedImage.gameObject.SetActive(true);
+                Debug.Log(2);
+                obj.transform.position = trackedImage.transform.position;
+                obj.transform.rotation = trackedImage.transform.rotation;
+                obj.SetActive(true);
                 timer = 0;
             }
             else
             {
-                trackedImage.gameObject.SetActive(false);
+                obj.SetActive(false);
+                Debug.Log(1);
             }
         }
     }
