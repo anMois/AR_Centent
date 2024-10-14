@@ -13,11 +13,12 @@ public class ButtonContoroll : MonoBehaviour
 
     private void Start()
     {
-        ChangeStatusText();
+        ChangeStatusText(curState);
     }
 
-    private void ChangeStatusText()
+    public void ChangeStatusText(State _state)
     {
+        curState = _state;
         sb.Clear();
         sb.Append(curState.ToString());
         curStatusText.SetText(sb);
@@ -29,8 +30,7 @@ public class ButtonContoroll : MonoBehaviour
         if (curState == State.Walk)
             return;
 
-        curState = State.Walk;
-        ChangeStatusText();
+        ChangeStatusText(State.Walk);
         animator.SetTrigger("Walk");
     }
 
@@ -40,8 +40,7 @@ public class ButtonContoroll : MonoBehaviour
         if (curState == State.Idle)
             return;
 
-        curState= State.Idle;
-        ChangeStatusText();
+        ChangeStatusText(State.Idle);
         animator.SetTrigger("Idle");
     }
 
@@ -51,8 +50,7 @@ public class ButtonContoroll : MonoBehaviour
         if (curState == State.Idle2)
             return;
 
-        curState= State.Idle2;
-        ChangeStatusText();
+        ChangeStatusText(State.Idle2);
         animator.SetTrigger("Other");
     }
 }

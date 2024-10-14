@@ -73,9 +73,9 @@ public class ImageTracker : MonoBehaviour
         {
             string name = trackedImage.referenceImage.name;
             GameObject obj = objDicList[name];
+            ButtonContoroll buttonControll = obj.GetComponent<ButtonContoroll>();
             if (trackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
             {
-                Debug.Log(2);
                 obj.transform.position = trackedImage.transform.position;
                 obj.transform.rotation = trackedImage.transform.rotation;
                 obj.SetActive(true);
@@ -84,7 +84,7 @@ public class ImageTracker : MonoBehaviour
             else
             {
                 obj.SetActive(false);
-                Debug.Log(1);
+                buttonControll.ChangeStatusText(ButtonContoroll.State.Idle);
             }
         }
     }
