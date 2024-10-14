@@ -1,23 +1,36 @@
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class ButtonContoroll : MonoBehaviour
 {
-    public enum State { Idle, Move, Other }
+    public enum State { Idle, Idle2, Walk }
     [SerializeField] State curState = State.Idle;
     [SerializeField] Animator animator;
+    [SerializeField] TextMeshProUGUI curStatusText;
+
+    private StringBuilder sb = new StringBuilder();
 
     private void Start()
     {
-        animator = transform.parent.GetComponent<Animator>();
+        ChangeStatusText();
+    }
+
+    private void ChangeStatusText()
+    {
+        sb.Clear();
+        sb.Append(curState.ToString());
+        curStatusText.SetText(sb);
     }
 
     //Move 버튼
     public void OnMove()
     {
-        if (curState == State.Move)
+        if (curState == State.Walk)
             return;
 
-        curState = State.Move;
+        curState = State.Walk;
+        ChangeStatusText();
         animator.SetTrigger("Walk");
     }
 
@@ -28,16 +41,18 @@ public class ButtonContoroll : MonoBehaviour
             return;
 
         curState= State.Idle;
+        ChangeStatusText();
         animator.SetTrigger("Idle");
     }
 
     //OtherIdle 버튼
     public void OnOtherIdle()
     {
-        if (curState == State.Other)
+        if (curState == State.Idle2)
             return;
 
-        curState= State.Other;
+        curState= State.Idle2;
+        ChangeStatusText();
         animator.SetTrigger("Other");
     }
 }
