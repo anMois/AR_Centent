@@ -2,7 +2,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-public class ButtonContoroll : MonoBehaviour
+public class StatusContoroll : MonoBehaviour
 {
     public enum State { Idle, Idle2, Walk }
     [SerializeField] State curState = State.Idle;

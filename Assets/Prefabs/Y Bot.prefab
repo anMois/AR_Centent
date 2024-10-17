@@ -448,8 +448,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7738178450088204806}
-        m_TargetAssemblyTypeName: ButtonContoroll, Assembly-CSharp
+      - m_Target: {fileID: 4739109794924862007}
+        m_TargetAssemblyTypeName: StatusContoroll, Assembly-CSharp
         m_MethodName: OnOtherIdle
         m_Mode: 1
         m_Arguments:
@@ -1862,8 +1862,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7738178450088204806}
-        m_TargetAssemblyTypeName: ButtonContoroll, Assembly-CSharp
+      - m_Target: {fileID: 4739109794924862007}
+        m_TargetAssemblyTypeName: StatusContoroll, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 1
         m_Arguments:
@@ -2981,7 +2981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fe7230ca5e77ef745bc6e68450fe8283, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 986e48e7f9708424f9865104ccdf9339, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3035,8 +3035,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7738178450088204806}
-        m_TargetAssemblyTypeName: ButtonContoroll, Assembly-CSharp
+      - m_Target: {fileID: 4739109794924862007}
+        m_TargetAssemblyTypeName: StatusContoroll, Assembly-CSharp
         m_MethodName: OnIdle
         m_Mode: 1
         m_Arguments:
@@ -3121,7 +3121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7078176579412094020}
   - component: {fileID: 3808515642423064126}
-  - component: {fileID: 7738178450088204806}
+  - component: {fileID: 4739109794924862007}
   m_Layer: 0
   m_Name: Y Bot
   m_TagString: Untagged
@@ -3169,7 +3169,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7738178450088204806
+--- !u!114 &4739109794924862007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3178,7 +3178,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7597973568779499262}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d68c469d398a542ad0309f61e5f904, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cc6829a0a0a41e4bb95501067a6f832, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
